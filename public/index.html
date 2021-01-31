@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mustache语法</title>
+</head>
+<style>
+
+  #user-table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    font-size: 20px;
+  }
+
+   td, th {
+    padding: 8px 15px;
+    border: 2px solid yellowgreen;
+  }
+
+</style>
+<body>
+  <div id="app"></div>
+
+  <script type="text/template" id="mytemplate">
+    <ul>
+      {{#books}}<li>{{.}}</li>{{/books}}
+    </ul>
+    <h3>当前分数：{{a.b.c}}</h3>
+    <table id="user-table">
+      <tr>
+        <th>姓名</th>
+        <th>邮箱</th>
+        <th>qq</th>
+      </tr>
+      {{#user}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{email}}</td>
+        <td>{{qq}}</td>
+      </tr>
+      {{/user}}
+    </table>
+
+    <ul>
+      {{#arr}}
+      <li>{{name}}</li>
+      <ol>
+        {{#hobbies}}
+        <li>{{.}}</li>
+        {{/hobbies}}
+      </ol>
+      {{/arr}}
+    </ul>
+
+  </script>
+  <script src="/phk/bundle.js"></script>
+
+  <script>
+    const templateStr = document.getElementById("mytemplate").innerHTML;
+    const data = {
+      user: [
+        { name: "Penghk", email: "1769476788@qq.com", qq: "1769476788" },
+        { name: "Penghk", email: "1769476788@qq.com", qq: "1769476788" },
+        { name: "Penghk", email: "1769476788@qq.com", qq: "1769476788" }
+      ],
+      arr: [
+        { name: "张三", hobbies: ["打篮球", "打羽毛球"] },
+        { name: "李四", hobbies: ["唱歌", "跳舞"] },
+        { name: "李大方", hobbies: ["唱歌", "跳舞", "看书"], info: "男" },
+      ],
+      books: ["西游记", "水浒传", "三国演义", "红楼梦"],
+      a: {
+        b: {
+          c: 100
+        }
+      }
+    }
+    const str = PhkMustache.render(templateStr, data);
+    const app = document.getElementById("app");
+    app.innerHTML += str;
+  </script>
+</body>
+
+</html>
