@@ -14,7 +14,7 @@ npm install
 npm run dev
 ```
 
-### 1.2.3. 查看项目演示
+## 1.2. 查看项目演示
 
 浏览器访问：http://localhost:8080
 
